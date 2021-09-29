@@ -7,9 +7,7 @@ app.get("/", (_, res) => {
   res.send("Hello World");
 });
 
-// TODO: Use json middleware (if needed)
-
-// TODO: Mount the routes (maybe 🤔 /api)
+app.use(express.json());
 
 app.listen(config.port, () => {
   console.log(`Server 🏃🏾‍♂️ at: http://localhost:${config.port}`);
