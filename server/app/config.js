@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default {
+  adminPassword: process.env.ADMIN_PASSWORD,
   db:
     process.env.DB_CLIENT_URL ||
     // Use localhost if no DB_CLIENT_URL is provided
