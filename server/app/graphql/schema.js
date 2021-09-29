@@ -12,6 +12,8 @@ export default gql`
   }
 
   type Product {
+    # Provided by MongoDB 🗃️
+    id: String!
     category: AllowedCategory!
     price: String!
     stocked: Boolean
