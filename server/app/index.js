@@ -1,10 +1,28 @@
+import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import { ApolloServer } from "apollo-server-express";
 import express from "express";
-import config from "./config.js";
+import http from "http";
+import { resolvers, typeDefs } from "./graphql/index.js";
 
 const app = express();
-
-app.use(express.json());
-
-app.listen(config.port, () => {
-  console.log(`Server 🏃🏾‍♂️ at: http://localhost:${config.port}`);
+const httpServer = http.createServer(app);
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
+
+server
+  .start()
+  .then(() => {
+    server.applyMiddleware({ app });
+
+    httpServer.listen({ port: 4000 }, () => {
+      console.info(
+        `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
+      );
+    });
+  })
+  .catch((error) => {
+    console.error("Error starting server: ", error);
+  });
