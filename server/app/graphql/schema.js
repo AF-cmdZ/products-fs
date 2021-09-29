@@ -20,7 +20,7 @@ export default gql`
 
   type Mutation {
     createProduct(product: Product): Product
-    updateProduct(product: Product): Product
-    deleteProduct(product: Product): Product
+    updateProduct(name: String, product: Product): Product
+    deleteProduct(name: String): Product
   }
 `;
