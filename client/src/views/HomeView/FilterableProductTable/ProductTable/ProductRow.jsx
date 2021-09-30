@@ -2,7 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import AdminContext from "@app/context/AdminContext";
 import PropTypes from "prop-types";
 import React from "react";
-import ProductContext from "@app/context/ProductIdContext";
+import ProductContext from "@app/context/ProductContext";
 
 const DELETE_PRODUCT = gql`
   mutation Deletion($deleteProductId: String!) {
@@ -12,7 +12,7 @@ const DELETE_PRODUCT = gql`
 
 function ProductRow({ product: { _id, name, price } }) {
   const [isAdmin] = React.useContext(AdminContext);
-  const [_, setProductId4Update] = React.useContext(ProductContext);
+  const [_, setProduct4Update] = React.useContext(ProductContext);
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: ["GetProducts"],
@@ -25,7 +25,8 @@ function ProductRow({ product: { _id, name, price } }) {
 
   const handleUpdate = (e) => {
     const id2Update = e.target.closest("tr").id;
-    setProductId4Update(id2Update);
+    // For now, just the `_id` is passed to the ProductContext
+    setProduct4Update({ _id: id2Update });
   };
 
   const renderUDBtns = () =>

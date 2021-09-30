@@ -13,6 +13,10 @@ export default {
     // https://docs.mongodb.com/manual/reference/method/db.collection.find/#definition
     return conn.find().toArray();
   },
+  show(_id) {
+    // https://docs.mongodb.com/manual/reference/method/db.collection.find/#definition
+    return conn.findOne({ _id: ObjectId(_id) });
+  },
   update({ _id, ...payload }) {
     return conn.updateOne({ _id: ObjectId(_id) }, { $set: payload });
   },

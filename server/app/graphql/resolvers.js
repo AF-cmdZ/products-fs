@@ -9,6 +9,9 @@ export default {
         return "fakeJWT";
       }
     },
+    product(_, { _id }) {
+      return productController.show(_id);
+    },
     products() {
       return productController.index();
     },

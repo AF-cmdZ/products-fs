@@ -9,7 +9,8 @@ export default gql`
   }
 
   type Query {
-    products: [Product]
+    product(_id: ID): Product
+    products: [Product]!
     isAdmin(pass: String): ID
   }
 

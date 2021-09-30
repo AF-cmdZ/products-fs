@@ -2,7 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import React from "react";
 
 const ADD_PRODUCT = gql`
-  mutation Mutation($newProduct: ProductInput!) {
+  mutation AddProduct($newProduct: ProductInput!) {
     createProduct(product: $newProduct) {
       _id
     }
@@ -31,7 +31,7 @@ function Form() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-4">
       <div>
         <label htmlFor="price" className="sr-only">
           Price
