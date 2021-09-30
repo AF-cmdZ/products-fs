@@ -1,7 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import AdminView from "./views/AdminView";
 import HomeView from "./views/HomeView";
 
 const client = new ApolloClient({
@@ -12,12 +13,18 @@ const client = new ApolloClient({
 function App() {
   return (
     <main className="container mx-auto flex flex-col items-center pt-4 max-w-xs">
-      <ApolloProvider client={client}>
-        <HomeView />
-      </ApolloProvider>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-24">
-        Admin
-      </button>
+      <Router>
+        <ApolloProvider client={client}>
+          <Switch>
+            <Route path="/" exact>
+              <HomeView />
+            </Route>
+            <Route path="/admin">
+              <AdminView />
+            </Route>
+          </Switch>
+        </ApolloProvider>
+      </Router>
     </main>
   );
 }
