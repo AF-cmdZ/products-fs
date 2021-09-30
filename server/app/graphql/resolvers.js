@@ -1,8 +1,14 @@
 import productController from "../controller.js";
 import createProduct from "../model.js";
+import config from "../config.js";
 
 export default {
   Query: {
+    isAdmin(_, { pass }) {
+      if (pass === config.adminPassword) {
+        return "fakeJWT";
+      }
+    },
     products() {
       return productController.index();
     },
@@ -21,8 +27,7 @@ export default {
       await productController.update(validatedProduct);
       return validatedProduct;
     },
-    deleteProduct(_, { 
-      _id }) {
+    deleteProduct(_, { _id }) {
       return productController.delete(_id);
     },
   },

@@ -16,6 +16,7 @@ export default gql`
 
   type Query {
     products: [Product]
+    isAdmin(pass: String): ID
   }
 
   type Product {
