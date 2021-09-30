@@ -1,5 +1,5 @@
 // Faux `enum`
-const categories = ["Sporting Goods", "Electronics"];
+const categories = ["SPORTING_GOODS", "ELECTRONICS"];
 
 const validate = ({ category, price, stocked = true, name = "" } = {}) => {
   const ret = [];
@@ -23,17 +23,16 @@ const validate = ({ category, price, stocked = true, name = "" } = {}) => {
   return ret;
 };
 
-const withStringifiedPrice = ({ price, ...rest }) => ({
-  ...rest,
+const withStringifiedPrice = ({ price, ...product }) => ({
+  ...product,
   price: `$${price.toFixed(2)}`,
 });
 
-export default (newProduct) => {
+export default ({ stocked = true, ...newProduct }) => {
   const errors = validate(newProduct);
   if (errors.length) {
     throw new Error(errors.join("\n"));
   }
 
-  // If no errors, just need to stringify the price
-  return withStringifiedPrice(newProduct);
+  return withStringifiedPrice({ ...newProduct, stocked });
 };
