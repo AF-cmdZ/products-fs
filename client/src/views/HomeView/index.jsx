@@ -29,7 +29,7 @@ function HomeView() {
           Admin
         </Link>
       )}
-      <AddProductForm />
+      {isAdmin && <AddProductForm />}
     </>
   );
 }
