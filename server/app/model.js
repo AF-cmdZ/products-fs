@@ -1,12 +1,5 @@
-// Faux `enum`
-const categories = ["SPORTING_GOODS", "ELECTRONICS"];
-
-const validate = ({ category, price, stocked = true, name = "" } = {}) => {
+const validate = ({ price, stocked = true, name = "" } = {}) => {
   const ret = [];
-
-  if (!categories.includes(category)) {
-    ret.push("Invalid category");
-  }
 
   if (price < 0.01) {
     ret.push("Price must be non-zero");

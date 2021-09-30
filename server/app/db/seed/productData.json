@@ -1,36 +1,30 @@
 [
   {
-    "category": "SPORTING_GOODS",
     "price": "$49.99",
     "stocked": true,
     "name": "Football"
   },
   {
-    "category": "SPORTING_GOODS",
     "price": "$9.99",
     "stocked": true,
     "name": "Baseball"
   },
   {
-    "category": "SPORTING_GOODS",
     "price": "$29.99",
     "stocked": false,
     "name": "Basketball"
   },
   {
-    "category": "ELECTRONICS",
     "price": "$99.99",
     "stocked": true,
     "name": "iPod Touch"
   },
   {
-    "category": "ELECTRONICS",
     "price": "$399.99",
     "stocked": false,
     "name": "iPhone 5"
   },
   {
-    "category": "ELECTRONICS",
     "price": "$199.99",
     "stocked": true,
     "name": "Nexus 7"

@@ -1,14 +1,8 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-  enum AllowedCategory {
-    SPORTING_GOODS
-    ELECTRONICS
-  }
-
   input ProductInput {
     _id: ID
-    category: AllowedCategory!
     price: Float!
     stocked: Boolean
     name: String!
@@ -21,7 +15,6 @@ export default gql`
 
   type Product {
     _id: ID!
-    category: AllowedCategory!
     price: String!
     stocked: Boolean
     name: String!
