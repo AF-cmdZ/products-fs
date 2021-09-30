@@ -1,4 +1,4 @@
-import FilterableProductTable from "components/FilterableProductTable";
+import FilterableProductTable from "./FilterableProductTable";
 import React from "react";
 import { Link } from "react-router-dom";
 
