@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import ProductTable from "./ProductTable";
 
 const GET_PRODUCTS = gql`
-  query Query {
+  query Products {
     products {
       _id
       category
