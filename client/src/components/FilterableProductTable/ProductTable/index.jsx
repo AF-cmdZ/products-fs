@@ -29,7 +29,7 @@ ProductTable.propTypes = {
       stocked: PropTypes.bool,
       name: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
 };
 
 export default ProductTable;

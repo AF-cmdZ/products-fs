@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-function SearchBar({ inputHandler, checkboxHandler }) {
+function SearchBar({ checkboxHandler, inputHandler }) {
   return (
     <form>
       <label htmlFor="search-bar" className="sr-only">
@@ -11,7 +11,9 @@ function SearchBar({ inputHandler, checkboxHandler }) {
         type="text"
         placeholder="Search..."
         id="search-bar"
-        onChange={inputHandler}
+        onChange={(event) => {
+          inputHandler(event.target.value);
+        }}
         className="p-1 rounded-sm mb-1"
       />
       <p>

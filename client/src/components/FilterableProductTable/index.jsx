@@ -19,18 +19,24 @@ function handleToggle(e) {
   console.log("toggle", e.target.checked);
 }
 
-function handleSearch(e) {
-  e.preventDefault();
-  const query = e.target.value;
-  console.log(query);
-}
-
 function FilterableProductTable() {
-  const { loading, data } = useQuery(GET_PRODUCTS);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [inStockOnly, setInStockOnly] = React.useState(false);
+
+  const { data } = useQuery(GET_PRODUCTS);
+  let filteredProducts = [];
+
+  if (data) {
+    const { products } = data;
+    filteredProducts = products.filter(({ name }) =>
+      name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
   return (
     <div className="flex flex-col justify-center gap-3">
-      <SearchBar checkboxHandler={handleToggle} inputHandler={handleSearch} />
-      {data ? <ProductTable products={data.products} /> : <p>⏳</p>}
+      <SearchBar checkboxHandler={handleToggle} inputHandler={setSearchTerm} />
+      <ProductTable products={filteredProducts} searchTerm={searchTerm} />
     </div>
   );
 }
