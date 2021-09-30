@@ -28,12 +28,11 @@ const withStringifiedPrice = ({ price, ...product }) => ({
   price: `$${price.toFixed(2)}`,
 });
 
-export default (newProduct) => {
+export default ({ stocked = true, ...newProduct }) => {
   const errors = validate(newProduct);
   if (errors.length) {
     throw new Error(errors.join("\n"));
   }
 
-  // If no errors, just need to stringify the price
-  return withStringifiedPrice(newProduct);
+  return withStringifiedPrice({ ...newProduct, stocked });
 };
