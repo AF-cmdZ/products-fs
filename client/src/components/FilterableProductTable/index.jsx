@@ -15,10 +15,6 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-function handleToggle(e) {
-  console.log("toggle", e.target.checked);
-}
-
 function FilterableProductTable() {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [inStockOnly, setInStockOnly] = React.useState(false);
