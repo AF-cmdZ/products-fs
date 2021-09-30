@@ -4,9 +4,9 @@ import FilterableProductTable from "./components/FilterableProductTable";
 
 function App() {
   return (
-    <div className="container mx-auto flex justify-center pt-4">
+    <main className="container mx-auto flex justify-center pt-4">
       <FilterableProductTable />
-    </div>
+    </main>
   );
 }
 
