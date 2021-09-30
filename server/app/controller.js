@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import config from "./config.js";
 import client from "./db/conns/client.js";
 
@@ -12,12 +13,10 @@ export default {
     // https://docs.mongodb.com/manual/reference/method/db.collection.find/#definition
     return conn.find().toArray();
   },
-  update(name, payload) {
-    // https://docs.mongodb.com/manual/reference/method/db.collection.updateOne/#definition
-    return conn.updateOne({ name }, { $inc: { [`tech${payload}Votes`]: 1 } });
+  update(id, payload) {
+    return conn.updateOne({ _id: ObjectId(id) }, { $set: payload });
   },
-  delete(name) {
-    // https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/#definition
-    return conn.deleteOne({ name });
+  delete(id) {
+    return conn.deleteOne({ _id: ObjectId(id) });
   },
 };
