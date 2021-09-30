@@ -16,7 +16,8 @@ export default {
   update(id, payload) {
     return conn.updateOne({ _id: ObjectId(id) }, { $set: payload });
   },
-  delete(id) {
-    return conn.deleteOne({ _id: ObjectId(id) });
+  async delete(id) {
+    await conn.deleteOne({ _id: ObjectId(id) });
+    return id;
   },
 };
