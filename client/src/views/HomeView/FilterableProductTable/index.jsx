@@ -7,7 +7,6 @@ const GET_PRODUCTS = gql`
   query GetProducts {
     products {
       _id
-      category
       price
       stocked
       name

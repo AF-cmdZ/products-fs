@@ -24,7 +24,6 @@ ProductTable.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired,
       stocked: PropTypes.bool,
       name: PropTypes.string.isRequired,
