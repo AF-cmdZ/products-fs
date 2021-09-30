@@ -1,7 +1,8 @@
+import AdminContext from "@app/context/AdminContext";
 import React from "react";
 import { Link } from "react-router-dom";
 import FilterableProductTable from "./FilterableProductTable";
-import AdminContext from "@app/context/AdminContext";
+import AddProductForm from "./Form";
 
 function HomeView() {
   const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
@@ -23,11 +24,12 @@ function HomeView() {
       ) : (
         <Link
           to="/admin"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-max"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-max mb-6"
         >
           Admin
         </Link>
       )}
+      <AddProductForm />
     </>
   );
 }
