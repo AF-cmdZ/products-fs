@@ -13,11 +13,11 @@ export default {
     // https://docs.mongodb.com/manual/reference/method/db.collection.find/#definition
     return conn.find().toArray();
   },
-  update(id, payload) {
-    return conn.updateOne({ _id: ObjectId(id) }, { $set: payload });
+  update({ _id, ...payload }) {
+    return conn.updateOne({ _id: ObjectId(_id) }, { $set: payload });
   },
-  async delete(id) {
-    await conn.deleteOne({ _id: ObjectId(id) });
-    return id;
+  async delete(_id) {
+    await conn.deleteOne({ _id: ObjectId(_id) });
+    return _id;
   },
 };

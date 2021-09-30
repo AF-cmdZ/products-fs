@@ -6,13 +6,20 @@ export default gql`
     ELECTRONICS
   }
 
+  input ProductInput {
+    _id: ID
+    category: AllowedCategory!
+    price: Float!
+    stocked: Boolean
+    name: String!
+  }
+
   type Query {
     products: [Product]
   }
 
   type Product {
-    # Provided by MongoDB 🗃️
-    id: String!
+    _id: ID!
     category: AllowedCategory!
     price: String!
     stocked: Boolean
@@ -20,8 +27,8 @@ export default gql`
   }
 
   type Mutation {
-    createProduct(product: Product): Product
-    updateProduct(name: String, product: Product): Product
-    deleteProduct(name: String): Product
+    createProduct(product: ProductInput!): Product
+    updateProduct(product: ProductInput!): Product
+    deleteProduct(id: String!): ID
   }
 `;
