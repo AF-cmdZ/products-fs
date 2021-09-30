@@ -1,5 +1,5 @@
 // Faux `enum`
-const categories = ["Sporting Goods", "Electronics"];
+const categories = ["SPORTING_GOODS", "ELECTRONICS"];
 
 const validate = ({ category, price, stocked = true, name = "" } = {}) => {
   const ret = [];
