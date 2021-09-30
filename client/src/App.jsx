@@ -2,7 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 import React from "react";
 import "./App.css";
-import FilterableProductTable from "./components/FilterableProductTable";
+import HomeView from "./views/HomeView";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -13,7 +13,7 @@ function App() {
   return (
     <main className="container mx-auto flex justify-center pt-4">
       <ApolloProvider client={client}>
-        <FilterableProductTable />
+        <HomeView />
       </ApolloProvider>
     </main>
   );
