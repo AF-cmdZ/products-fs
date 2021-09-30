@@ -24,14 +24,19 @@ function FilterableProductTable() {
 
   if (data) {
     const { products } = data;
-    filteredProducts = products.filter(({ name }) =>
-      name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    filteredProducts = products
+      .filter(({ name }) =>
+        name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .filter(({ stocked }) => !inStockOnly || stocked);
   }
 
   return (
     <div className="flex flex-col justify-center gap-3">
-      <SearchBar checkboxHandler={handleToggle} inputHandler={setSearchTerm} />
+      <SearchBar
+        checkboxHandler={setInStockOnly}
+        inputHandler={setSearchTerm}
+      />
       <ProductTable products={filteredProducts} searchTerm={searchTerm} />
     </div>
   );

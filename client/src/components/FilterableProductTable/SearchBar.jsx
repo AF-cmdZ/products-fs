@@ -17,7 +17,10 @@ function SearchBar({ checkboxHandler, inputHandler }) {
         className="p-1 rounded-sm mb-1"
       />
       <p>
-        <input type="checkbox" onChange={checkboxHandler} />
+        <input
+          type="checkbox"
+          onChange={(event) => checkboxHandler(event.target.checked)}
+        />
         {` `}
         Only show products in stock
       </p>
