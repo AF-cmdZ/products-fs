@@ -2,6 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import AdminContext from "./context/AdminContext";
 import AdminView from "./views/AdminView";
 import HomeView from "./views/HomeView";
 
@@ -15,14 +16,17 @@ function App() {
     <main className="container mx-auto flex flex-col items-center pt-4 max-w-xs">
       <Router>
         <ApolloProvider client={client}>
-          <Switch>
-            <Route path="/" exact>
-              <HomeView />
-            </Route>
-            <Route path="/admin">
-              <AdminView />
-            </Route>
-          </Switch>
+          {/* This is a precursor to using useContext with useReducer! This will replace need for Redux in many cases! */}
+          <AdminContext.Provider value={React.useState(false)}>
+            <Switch>
+              <Route path="/" exact>
+                <HomeView />
+              </Route>
+              <Route path="/admin">
+                <AdminView />
+              </Route>
+            </Switch>
+          </AdminContext.Provider>
         </ApolloProvider>
       </Router>
     </main>

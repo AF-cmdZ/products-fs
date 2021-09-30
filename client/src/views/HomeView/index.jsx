@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import FilterableProductTable from "./FilterableProductTable";
+import AdminContext from "@app/context/AdminContext";
 
 function HomeView() {
+  const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
+
   const handleClick = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
+    setIsAdmin(false);
   };
 
   return (
     <>
       <FilterableProductTable />
-      {localStorage.getItem("token") ? (
+      {isAdmin ? (
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 w-max"
           onClick={handleClick}

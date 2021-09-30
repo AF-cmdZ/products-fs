@@ -1,6 +1,7 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import adminContext from "../../context/AdminContext";
 import Form from "./Form";
 
 const IS_ADMIN = gql`
@@ -10,14 +11,22 @@ const IS_ADMIN = gql`
 `;
 
 function AdminView() {
+  const [isAdmin, setIsAdmin] = React.useContext(adminContext);
   const history = useHistory();
+
+  // If already isAdmin, go home 🏠
+  React.useEffect(() => {
+    if (isAdmin) {
+      history.push("/");
+    }
+  });
+
   const [getIsAdmin] = useLazyQuery(IS_ADMIN, {
     fetchPolicy: "no-cache",
     nextFetchPolicy: "no-cache",
     onCompleted(token) {
       if (token.isAdmin) {
-        localStorage.setItem("token", token.isAdmin);
-        history.push("/");
+        setIsAdmin(true);
       }
     },
   });
