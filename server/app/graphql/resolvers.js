@@ -21,8 +21,9 @@ export default {
       await productController.update(validatedProduct);
       return validatedProduct;
     },
-    deleteProduct(_, { id }) {
-      return productController.delete(id);
+    deleteProduct(_, { 
+      _id }) {
+      return productController.delete(_id);
     },
   },
 };
