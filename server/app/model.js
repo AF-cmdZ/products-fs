@@ -23,8 +23,8 @@ const validate = ({ category, price, stocked = true, name = "" } = {}) => {
   return ret;
 };
 
-const withStringifiedPrice = ({ price, ...rest }) => ({
-  ...rest,
+const withStringifiedPrice = ({ price, ...product }) => ({
+  ...product,
   price: `$${price.toFixed(2)}`,
 });
 
