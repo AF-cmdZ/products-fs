@@ -1,13 +1,21 @@
 import AdminContext from "@app/context/AdminContext";
 import PropTypes from "prop-types";
 import React from "react";
+import { gql, useMutation } from "@apollo/client";
+
+const DELETE_PRODUCT = gql`
+  mutation Deletion($deleteProductId: String!) {
+    deleteProduct(_id: $deleteProductId)
+  }
+`;
 
 function ProductRow({ product: { _id, name, price } }) {
   const [isAdmin] = React.useContext(AdminContext);
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
   const handleDelete = (e) => {
     const id2Delete = e.target.closest("tr").id;
-    console.log(id2Delete);
+    deleteProduct({ variables: { deleteProductId: id2Delete } });
   };
 
   const renderUDBtns = () =>
