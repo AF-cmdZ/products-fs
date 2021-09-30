@@ -28,10 +28,10 @@ function handleSearch(e) {
 function FilterableProductTable() {
   const { loading, data } = useQuery(GET_PRODUCTS);
   return (
-    <>
+    <div className="flex flex-col justify-center gap-3">
       <SearchBar checkboxHandler={handleToggle} inputHandler={handleSearch} />
       {data ? <ProductTable products={data.products} /> : <p>⏳</p>}
-    </>
+    </div>
   );
 }
 
