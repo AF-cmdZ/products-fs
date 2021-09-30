@@ -5,11 +5,19 @@ import React from "react";
 function ProductRow({ product: { _id, name, price } }) {
   const [isAdmin] = React.useContext(AdminContext);
 
+  const handleDelete = (e) => {
+    const id2Delete = e.target.closest("tr").id;
+    console.log(id2Delete);
+  };
+
   const renderUDBtns = () =>
     isAdmin && (
       <>
         <td>
-          <button className="btn bg-red-500 text-white p-1 text-xs rounded-lg">
+          <button
+            className="btn bg-red-500 text-white p-1 text-xs rounded-lg"
+            onClick={handleDelete}
+          >
             🔥 Delete
           </button>
         </td>
