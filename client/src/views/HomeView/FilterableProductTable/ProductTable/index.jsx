@@ -1,5 +1,6 @@
-import React from "react";
+import ProductType from "@app/types/Product";
 import PropTypes from "prop-types";
+import React from "react";
 import ProductRow from "./ProductRow";
 
 function ProductTable({ products }) {
@@ -21,14 +22,7 @@ function ProductTable({ products }) {
 }
 
 ProductTable.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-      stocked: PropTypes.bool,
-      name: PropTypes.string.isRequired,
-    })
-  ),
+  products: PropTypes.arrayOf(PropTypes.shape(ProductType)),
 };
 
 export default ProductTable;

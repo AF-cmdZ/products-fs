@@ -1,4 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
+import ProductType from "@app/types/Product";
+import PropTypes from "prop-types";
 import React from "react";
 import ProductTable from "./ProductTable";
 import SearchBar from "./SearchBar";
@@ -21,6 +22,10 @@ function FilterableProductTable({ products }) {
     </div>
   );
 }
+
+FilterableProductTable.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape(ProductType)),
+};
 
 FilterableProductTable.defaultProps = {
   products: [],
