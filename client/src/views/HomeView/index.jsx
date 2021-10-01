@@ -17,6 +17,10 @@ const GET_PRODUCTS = gql`
 `;
 
 function HomeView() {
+  React.useEffect(() => {
+    document.title = "🏠 Home";
+  });
+
   const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
 
   // TODO{manav.misra}: Do some spit with loading state ⏳

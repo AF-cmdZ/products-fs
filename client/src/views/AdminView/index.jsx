@@ -11,6 +11,10 @@ const IS_ADMIN = gql`
 `;
 
 function AdminView() {
+  React.useEffect(() => {
+    document.title = "Admin";
+  });
+
   const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
   const history = useHistory();
 
