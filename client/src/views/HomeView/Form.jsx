@@ -11,6 +11,15 @@ const ADD_PRODUCT = gql`
   }
 `;
 
+const UPDATE_PRODUCT = gql`
+  mutation UpdateProduct($updatedProduct: ProductInput!) {
+    updateProduct(product: $updatedProduct) {
+      # Don't really need this spit back
+      _id
+    }
+  }
+`;
+
 function Form({ product4Update }) {
   const [addProduct] = useMutation(ADD_PRODUCT, {
     refetchQueries: ["GetProducts"],
@@ -19,17 +28,40 @@ function Form({ product4Update }) {
     },
   });
 
+  const [updateProduct] = useMutation(UPDATE_PRODUCT, {
+    refetchQueries: ["GetProducts"],
+    onCompleted: () => {
+      // TODO{manav.misra}: Use `useRef` to clear the form
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addProduct({
-      variables: {
-        newProduct: {
-          ...Object.fromEntries(new FormData(e.target)),
-          price: parseFloat(e.target.price.value),
-          stocked: e.target.stocked.checked,
+    if (product4Update) {
+      updateProduct({
+        variables: {
+          updatedProduct: {
+            // This is not doing much - it's just the `name` field. It gets overwritten by the mixins below.
+            ...Object.fromEntries(new FormData(e.target)),
+
+            // ⚠️ Must include the _id field to update a product (unlike create)
+            _id: product4Update._id,
+            price: parseFloat(e.target.price.value),
+            stocked: e.target.stocked.checked,
+          },
         },
-      },
-    });
+      });
+    } else {
+      addProduct({
+        variables: {
+          newProduct: {
+            ...Object.fromEntries(new FormData(e.target)),
+            price: parseFloat(e.target.price.value),
+            stocked: e.target.stocked.checked,
+          },
+        },
+      });
+    }
   };
 
   return (
@@ -67,11 +99,11 @@ function Form({ product4Update }) {
           type="checkbox"
           id="stocked"
           name="stocked"
-          defaultValue={product4Update?.checked}
+          defaultChecked={product4Update?.stocked}
         />
       </div>
       <button type="submit" className="bg-green-500 p-2 rounded text-white">
-        Add Product
+        {product4Update ? "Update Product" : "Add Product"}
       </button>
       <button type="reset" className="bg-yellow-500 p-2 rounded">
         Clear
