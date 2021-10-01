@@ -1,39 +1,26 @@
-import { gql, useLazyQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import AdminContext from "@app/context/AdminContext";
-import ProductContext from "@app/context/ProductContext";
 import React from "react";
 import { Link } from "react-router-dom";
 import FilterableProductTable from "./FilterableProductTable";
 import AddProductForm from "./Form";
 
-const SHOW_PRODUCT = gql`
-  query ShowProduct($productId: ID) {
-    product(_id: $productId) {
+const GET_PRODUCTS = gql`
+  query GetProducts {
+    products {
+      _id
       price
       stocked
       name
-      _id
     }
   }
 `;
 
 function HomeView() {
   const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
-  const [product4Update, setProduct4Update] = React.useContext(ProductContext);
 
-  const [showProduct] = useLazyQuery(SHOW_PRODUCT, {
-    onCompleted(product) {
-      setProduct4Update(product);
-    },
-  });
-
-  React.useEffect(() => {
-    if (product4Update._id) {
-      showProduct({
-        variables: { productId: product4Update._id },
-      });
-    }
-  }, [product4Update._id, showProduct]);
+  // TODO{manav.misra}: Do some spit with loading state ⏳
+  const { data } = useQuery(GET_PRODUCTS);
 
   const handleClick = () => {
     setIsAdmin(false);
@@ -41,7 +28,7 @@ function HomeView() {
 
   return (
     <>
-      <FilterableProductTable />
+      <FilterableProductTable products={data?.products} />
       {isAdmin ? (
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 w-max"

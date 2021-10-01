@@ -1,7 +1,7 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import adminContext from "../../context/AdminContext";
+import AdminContext from "@app/context/AdminContext";
 import Form from "./Form";
 
 const IS_ADMIN = gql`
@@ -11,7 +11,7 @@ const IS_ADMIN = gql`
 `;
 
 function AdminView() {
-  const [isAdmin, setIsAdmin] = React.useContext(adminContext);
+  const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
   const history = useHistory();
 
   // If already isAdmin, go home 🏠

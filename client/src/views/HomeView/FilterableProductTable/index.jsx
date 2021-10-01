@@ -1,34 +1,15 @@
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
-import SearchBar from "./SearchBar";
 import ProductTable from "./ProductTable";
+import SearchBar from "./SearchBar";
 
-const GET_PRODUCTS = gql`
-  query GetProducts {
-    products {
-      _id
-      price
-      stocked
-      name
-    }
-  }
-`;
-
-function FilterableProductTable() {
+function FilterableProductTable({ products }) {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [inStockOnly, setInStockOnly] = React.useState(false);
 
-  const { data } = useQuery(GET_PRODUCTS);
-  let filteredProducts = [];
-
-  if (data) {
-    const { products } = data;
-    filteredProducts = products
-      .filter(({ name }) =>
-        name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      .filter(({ stocked }) => !inStockOnly || stocked);
-  }
+  const filteredProducts = products
+    .filter(({ name }) => name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter(({ stocked }) => !inStockOnly || stocked);
 
   return (
     <div className="flex flex-col justify-center gap-3">
@@ -40,5 +21,9 @@ function FilterableProductTable() {
     </div>
   );
 }
+
+FilterableProductTable.defaultProps = {
+  products: [],
+};
 
 export default FilterableProductTable;
