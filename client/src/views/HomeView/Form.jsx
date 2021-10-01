@@ -1,4 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
+import ProductType from "@app/types/Product";
+import PropTypes from "prop-types";
 import React from "react";
 
 const ADD_PRODUCT = gql`
@@ -9,7 +11,7 @@ const ADD_PRODUCT = gql`
   }
 `;
 
-function Form() {
+function Form({ product4Update }) {
   const [addProduct] = useMutation(ADD_PRODUCT, {
     refetchQueries: ["GetProducts"],
     onCompleted: () => {
@@ -36,19 +38,37 @@ function Form() {
         <label htmlFor="price" className="sr-only">
           Price
         </label>
-        <input type="number" id="price" placeholder="Price" name="price" />
+        <input
+          type="number"
+          id="price"
+          placeholder="Price"
+          name="price"
+          defaultValue={Number(product4Update?.price.slice(1))}
+        />
       </div>
       <div>
         <label htmlFor="name" className="sr-only">
           Name
         </label>
-        <input type="text" id="name" placeholder="Name" name="name" />
+        <input
+          type="text"
+          id="name"
+          placeholder="Name"
+          name="name"
+          step="0.01"
+          defaultValue={product4Update?.name}
+        />
       </div>
       <div>
         <label htmlFor="stocked" className="mr-2">
           Stocked?
         </label>
-        <input type="checkbox" id="stocked" name="stocked" />
+        <input
+          type="checkbox"
+          id="stocked"
+          name="stocked"
+          defaultValue={product4Update?.checked}
+        />
       </div>
       <button type="submit" className="bg-green-500 p-2 rounded text-white">
         Add Product
@@ -59,5 +79,9 @@ function Form() {
     </form>
   );
 }
+
+Form.propTypes = {
+  product4Update: PropTypes.shape(ProductType),
+};
 
 export default Form;

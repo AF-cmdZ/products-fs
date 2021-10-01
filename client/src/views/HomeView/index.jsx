@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import AdminContext from "@app/context/AdminContext";
+import ProductUpdateContext from "@app/context/ProductUpdateContext";
 import React from "react";
 import { Link } from "react-router-dom";
 import FilterableProductTable from "./FilterableProductTable";
@@ -22,6 +23,7 @@ function HomeView() {
   });
 
   const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
+  const [productUpdate] = React.useContext(ProductUpdateContext);
 
   // TODO{manav.misra}: Do some spit with loading state ⏳
   const { data } = useQuery(GET_PRODUCTS);
@@ -48,7 +50,13 @@ function HomeView() {
           Admin
         </Link>
       )}
-      {isAdmin && <AddProductForm />}
+      {isAdmin && (
+        <AddProductForm
+          product4Update={data?.products.find(
+            ({ _id }) => _id === productUpdate
+          )}
+        />
+      )}
     </>
   );
 }

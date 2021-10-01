@@ -1,5 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import AdminContext from "@app/context/AdminContext";
+import ProductUpdateContext from "@app/context/ProductUpdateContext";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -12,6 +13,9 @@ const DELETE_PRODUCT = gql`
 function ProductRow({ product: { _id, name, price } }) {
   const [isAdmin] = React.useContext(AdminContext);
 
+  // No need for the ℹ️ information - just need ability to set it
+  const [_, setProductUpdate] = React.useContext(ProductUpdateContext);
+
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: ["GetProducts"],
   });
@@ -22,7 +26,7 @@ function ProductRow({ product: { _id, name, price } }) {
   };
 
   const handleUpdate = (e) => {
-    const id2Update = e.target.closest("tr").id;
+    setProductUpdate(e.target.closest("tr").id);
   };
 
   const renderUDBtns = () =>

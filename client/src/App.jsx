@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import AdminContext from "./context/AdminContext";
+import ProductUpdateContext from "./context/ProductUpdateContext";
 import AdminView from "./views/AdminView";
 import HomeView from "./views/HomeView";
 
@@ -20,7 +21,10 @@ function App() {
           <AdminContext.Provider value={React.useState(false)}>
             <Switch>
               <Route path="/" exact>
-                <HomeView />
+                {/* Will hold `_id` of product 2 update */}
+                <ProductUpdateContext.Provider value={React.useState("")}>
+                  <HomeView />
+                </ProductUpdateContext.Provider>
               </Route>
               <Route path="/admin">
                 <AdminView />
