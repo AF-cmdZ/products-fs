@@ -1,7 +1,7 @@
 import { gql, useLazyQuery } from "@apollo/client";
+import AdminContext from "@app/context/AdminContext";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import AdminContext from "@app/context/AdminContext";
 import Form from "./Form";
 
 const IS_ADMIN = gql`
@@ -13,7 +13,9 @@ const IS_ADMIN = gql`
 function AdminView() {
   React.useEffect(() => {
     document.title = "Admin";
-  });
+    // only fire the first time with the empty dependency array
+    // This is a characteristic of useEffect
+  }, []);
 
   const [isAdmin, setIsAdmin] = React.useContext(AdminContext);
   const history = useHistory();
