@@ -10,6 +10,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  // Todo: Add context middleware with JWT
 });
 
 server

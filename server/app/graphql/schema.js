@@ -22,8 +22,8 @@ export default gql`
   }
 
   type Mutation {
-    createProduct(product: ProductInput!): Product
-    updateProduct(product: ProductInput!): Product
-    deleteProduct(_id: String!): ID
+    createProduct(product: ProductInput!): Product!
+    updateProduct(product: ProductInput!): Product!
+    deleteProduct(_id: String!): ID!
   }
 `;
